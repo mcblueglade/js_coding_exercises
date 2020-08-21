@@ -11,16 +11,16 @@ function isFromManchester(person) {
 
 function getBusNumbers(people) {
   if (people === undefined) throw new Error("people is required");
-  
+
   const maxPeoplePerBus = 40;
-  var num = Math.floor(people / maxPeoplePerBus );
+  var num = Math.floor(people / maxPeoplePerBus);
   if (people % maxPeoplePerBus != 0) { num++; }
   return num;
 }
 
 function countSheep(arr) {
   if (arr === undefined) throw new Error("arr is required");
-  return arr.filter(function(x){ return x === "sheep"; }).length;
+  return arr.filter(function (x) { return x === "sheep"; }).length;
 }
 
 function hasMPostCode(person) {

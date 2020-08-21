@@ -12,11 +12,11 @@ function generateInitials(firstName, lastName) {
 function addVAT(originalPrice, vatRate) {
   if (originalPrice === undefined) throw new Error("originalPrice is requied");
   if (vatRate === undefined) throw new Error("vatRate is required");
- 
-  var vatAddedPrice = (originalPrice * (1 + (vatRate/100)));
- 
+
+  var vatAddedPrice = (originalPrice * (1 + (vatRate / 100)));
+
   //If this is not a whole number, format as a float with 2 demical places 
-  if ((vatAddedPrice * 100) % 100 != 0) { 
+  if ((vatAddedPrice * 100) % 100 != 0) {
     vatAddedPrice = parseFloat(vatAddedPrice.toFixed(2));
   }
   return vatAddedPrice;
@@ -25,11 +25,11 @@ function addVAT(originalPrice, vatRate) {
 function getSalePrice(originalPrice, reduction) {
   if (originalPrice === undefined) throw new Error("originalPrice is required");
   if (reduction === undefined) throw new Error("reduction is required");
-  
-  var reducedSalePrice = originalPrice * (1-(reduction/100))
-  
+
+  var reducedSalePrice = originalPrice * (1 - (reduction / 100))
+
   //If this is not a whole number, format as a float with 2 demical places
-  if ((reducedSalePrice * 100) % 100 != 0) { 
+  if ((reducedSalePrice * 100) % 100 != 0) {
     reducedSalePrice = parseFloat(reducedSalePrice.toFixed(2));
   }
   return reducedSalePrice;
@@ -59,19 +59,19 @@ function reverseWord(word) {
 
 function reverseAllWords(words) {
   if (words === undefined) throw new Error("words is required");
-  
+
   var reversedWords = [];
-  words.forEach(function(word) {
-    reversedWords.push( word.split("").reverse().join("") );
+  words.forEach(function (word) {
+    reversedWords.push(word.split("").reverse().join(""));
   });
   return reversedWords;
 }
 
 function countLinuxUsers(users) {
   if (users === undefined) throw new Error("users is required");
-  
+
   var counter = 0;
-  users.forEach(function(user) {
+  users.forEach(function (user) {
     if (user['type'] == 'Linux') { counter++; }
   });
   return counter;
@@ -79,10 +79,10 @@ function countLinuxUsers(users) {
 
 function getMeanScore(scores) {
   if (scores === undefined) throw new Error("scores is required");
-  
+
   var mean = undefined;
   var totalScore = 0;
-  scores.forEach(function(score) {
+  scores.forEach(function (score) {
     totalScore += score;
   });
 
@@ -90,17 +90,17 @@ function getMeanScore(scores) {
     mean = totalScore / scores.length;
     if ((mean * 100) % 100 != 0) {
       mean = parseFloat(mean.toFixed(2));
-    } 
+    }
   }
   return mean;
 }
 
 function simpleFizzBuzz(n) {
   if (n === undefined) throw new Error("n is required");
-  
-  if ( (n % 3 == 0) && (n % 5 == 0) ) { return "fizzbuzz"}
-  else if (n % 3 == 0) { return "fizz"}
-  else if (n % 5 == 0) { return "buzz"}
+
+  if ((n % 3 == 0) && (n % 5 == 0)) { return "fizzbuzz" }
+  else if (n % 3 == 0) { return "fizz" }
+  else if (n % 5 == 0) { return "buzz" }
   else return n;
 }
 
