@@ -1,12 +1,18 @@
 const findNextNumber = (nums, n) => {
   if (nums === undefined) throw new Error("nums is required");
   if (n === undefined) throw new Error("n is required");
-  // Your code here!
+  const i = nums.indexOf(n);
+  return (i === -1 || i + 1 >= nums.length) ? null : nums[i + 1];
 };
 
 const count1sand0s = str => {
   if (str === undefined) throw new Error("str is required");
-  // Your code here!
+
+  var dict = { 0: 0 };
+  [...str].forEach(c => {
+    c in dict ? dict[c] += 1 : dict[c] = 1;
+  });
+  return dict;
 };
 
 const reverseNumber = n => {
