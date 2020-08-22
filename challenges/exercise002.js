@@ -5,8 +5,9 @@ function getFillings(sandwich) {
 
 function isFromManchester(person) {
   if (person === undefined) throw new Error("person is required");
-  if (person.city === "Manchester") { return true; }
-  else return false;
+  return Object.entries(person).
+    map( attribute => attribute[0] === 'city' && attribute[1] === "Manchester").
+    reduce((p,c) => p || c);
 }
 
 function getBusNumbers(people) {
@@ -25,7 +26,6 @@ function countSheep(arr) {
 
 function hasMPostCode(person) {
   if (person === undefined) throw new Error("person is required");
-
   return (person.address.city === "Manchester" && person.address.postCode.charAt(0) === 'M');
 }
 
