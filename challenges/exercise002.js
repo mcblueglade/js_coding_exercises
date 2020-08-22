@@ -6,8 +6,8 @@ function getFillings(sandwich) {
 function isFromManchester(person) {
   if (person === undefined) throw new Error("person is required");
   return Object.entries(person).
-    map( attribute => attribute[0] === 'city' && attribute[1] === "Manchester").
-    reduce((p,c) => p || c);
+    map(attribute => attribute[0] === 'city' && attribute[1] === "Manchester").
+    reduce((p, c) => p || c);
 }
 
 function getBusNumbers(people) {
