@@ -2,11 +2,12 @@ function findSmallNums(nums) {
   if (!nums) throw new Error("nums is required");
 
   var smallNums = [];
-  for (let i = 0; i < nums.length; i++) {
-    if (nums[i] < 1) {
-      smallNums.push(nums[i]);
+
+  nums.forEach(element => {
+    if (element < 1) {
+      smallNums.push(element);
     }
-  }
+  });
   return smallNums;
 }
 
@@ -17,11 +18,11 @@ function findNamesBeginningWith(names, char) {
   var foundNames = [];
   let upperChar = char.toUpperCase();
 
-  for (let i = 0; i < names.length; i++) {
-    if (names[i].charAt(0).toUpperCase() === upperChar) {
-      foundNames.push(names[i]);
+  names.forEach(element => {
+    if (element.charAt(0).toUpperCase() === upperChar) {
+      foundNames.push(element);
     }
-  }
+  });
   return foundNames;
 }
 
@@ -31,11 +32,11 @@ function findVerbs(words) {
   var foundVerbs = [];
   var qualifier = "to ";
 
-  for (let i = 0; i < words.length; i++) {
-    if (words[i].slice(0, 3) === qualifier) {
-      foundVerbs.push(words[i]);
+  words.forEach(element => {
+    if (element.slice(0, 3) === qualifier) {
+      foundVerbs.push(element);
     }
-  }
+  });
   return foundVerbs;
 }
 
@@ -44,11 +45,11 @@ function getIntegers(nums) {
 
   var foundInts = [];
 
-  for (let i = 0; i < nums.length; i++) {
-    if (typeof (nums[i]) === "number" && nums[i] % 1 === 0) {
-      foundInts.push(nums[i]);
+  nums.forEach(element => {
+    if (typeof (element) === "number" && element % 1 === 0) {
+      foundInts.push(element);
     }
-  }
+  });
   return foundInts;
 }
 
@@ -57,9 +58,9 @@ function getCities(users) {
 
   var foundCities = [];
 
-  for (let i = 0; i < users.length; i++) {
-    foundCities.push(users[i].data.city.displayName);
-  }
+  users.forEach(element => {
+    foundCities.push(element.data.city.displayName);
+  });
   return foundCities;
 }
 
@@ -68,10 +69,10 @@ function getSquareRoots(nums) {
 
   var sqrtNums = [];
 
-  for (let i = 0; i < nums.length; i++) {
-    let sqrt = Math.sqrt(nums[i]);
+  nums.forEach(element => {
+    let sqrt = Math.sqrt(element);
     sqrtNums.push(sqrt % 1 === 0 ? sqrt : parseFloat(sqrt.toFixed(2)));
-  }
+  });
   return sqrtNums;
 }
 
@@ -82,11 +83,11 @@ function findSentencesContaining(sentences, str) {
   var foundSentences = [];
   var re = new RegExp(str, 'gi')
 
-  for (let i = 0; i < sentences.length; i++) {
-    if (sentences[i].match(re)) {
-      foundSentences.push(sentences[i]);
+  sentences.forEach(element => {
+    if (element.match(re)) {
+      foundSentences.push(element);
     }
-  }
+  });
   return foundSentences;
 }
 
@@ -95,10 +96,9 @@ function getLongestSides(triangles) {
 
   var foundLongestSides = [];
 
-  console.log(triangles.length);
-  for (let i = 0; i < triangles.length; i++) {
-    foundLongestSides.push(Math.max(...triangles[i]));
-  }
+  triangles.forEach(element => {
+    foundLongestSides.push(Math.max(...element));
+  });
   return foundLongestSides;
 }
 
