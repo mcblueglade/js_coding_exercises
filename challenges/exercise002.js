@@ -14,14 +14,13 @@ function getBusNumbers(people) {
   if (people === undefined) throw new Error("people is required");
 
   const maxPeoplePerBus = 40;
-  var num = Math.floor(people / maxPeoplePerBus);
-  if (people % maxPeoplePerBus != 0) { num++; }
-  return num;
+  let num = Math.floor(people / maxPeoplePerBus);
+  return (people % maxPeoplePerBus === 0) ? num : ++num;
 }
 
 function countSheep(arr) {
   if (arr === undefined) throw new Error("arr is required");
-  return arr.filter(function (x) { return x === "sheep"; }).length;
+  return arr.filter(element => element === "sheep").length;
 }
 
 function hasMPostCode(person) {

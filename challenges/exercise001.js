@@ -14,7 +14,7 @@ function addVAT(originalPrice, vatRate) {
   if (vatRate === undefined) throw new Error("vatRate is required");
 
   let vatAddedPrice = (originalPrice * (1 + (vatRate / 100)));
-  return (vatAddedPrice * 100) % 100 == 0 ? vatAddedPrice : parseFloat(vatAddedPrice.toFixed(2));
+  return (vatAddedPrice * 100) % 100 === 0 ? vatAddedPrice : parseFloat(vatAddedPrice.toFixed(2));
 }
 
 function getSalePrice(originalPrice, reduction) {
@@ -22,7 +22,7 @@ function getSalePrice(originalPrice, reduction) {
   if (reduction === undefined) throw new Error("reduction is required");
 
   let reducedSalePrice = originalPrice * (1 - (reduction / 100));
-  return (reducedSalePrice * 100) % 100 == 0 ? reducedSalePrice : parseFloat(reducedSalePrice.toFixed(2));
+  return (reducedSalePrice * 100) % 100 === 0 ? reducedSalePrice : parseFloat(reducedSalePrice.toFixed(2));
 }
 
 function getMiddleCharacter(str) {
@@ -49,12 +49,12 @@ function getMeanScore(scores) {
   if (scores === undefined) throw new Error("scores is required");
 
   let mean = scores.reduce((a, b) => a + b) / scores.length;
-  return ((mean * 100) % 100 == 0) ? mean : mean = parseFloat(mean.toFixed(2));
+  return ((mean * 100) % 100 === 0) ? mean : mean = parseFloat(mean.toFixed(2));
 }
 
 function simpleFizzBuzz(n) {
   if (n === undefined) throw new Error("n is required");
-  return (n % 3 == 0) && (n % 5 == 0) ? "fizzbuzz" : (n % 3 == 0) ? "fizz" : (n % 5 == 0) ? "buzz" : n;
+  return (n % 3 === 0) && (n % 5 === 0) ? "fizzbuzz" : (n % 3 === 0) ? "fizz" : (n % 5 === 0) ? "buzz" : n;
 }
 
 module.exports = {
