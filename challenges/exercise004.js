@@ -1,12 +1,28 @@
 function findSmallNums(nums) {
   if (!nums) throw new Error("nums is required");
-  // Your code here
+  
+  var smallNums = [];
+  for (let i = 0; i < nums.length; i++) {
+    if (nums[i] < 1) {
+      smallNums.push(nums[i]);
+    }
+  }
+  return smallNums;
 }
 
 function findNamesBeginningWith(names, char) {
   if (!names) throw new Error("names is required");
   if (!char) throw new Error("char is required");
-  // Your code here
+
+  var foundNames = [];
+  let upperChar = char.toUpperCase();
+  
+  for (let i = 0; i < names.length; i++) {
+    if (names[i].charAt(0).toUpperCase() === upperChar ) {
+      foundNames.push(names[i]);
+    }
+  }
+  return foundNames;
 }
 
 function findVerbs(words) {
