@@ -1,31 +1,25 @@
 function getSquares(nums) {
   if (nums === undefined) throw new Error("nums is required");
-  const square_nums = (num) => num ** 2;
-  return nums.map(square_nums);
+  return nums.map((num) => num ** 2);
 }
 
 function camelCaseWords(words) {
   if (words === undefined) throw new Error("words is required");
-
-  var camelCase = words[0].charAt(0).toLowerCase() + words[0].slice(1);
-  words.slice(1).forEach(function (word) {
-    camelCase += word.charAt(0).toUpperCase() + word.slice(1);
-  });
-  return camelCase;
+  return words.slice(1).reduce(function(p,c) { return p + c[0].charAt(0).toUpperCase() + c.slice(1)},
+                               words[0].charAt(0).toLowerCase() + words[0].slice(1));
 }
 
 function getTotalSubjects(people) {
   if (people === undefined) throw new Error("people is required");
-
-  var totalSubjects = 0;
-  people.filter(function (x) { totalSubjects += x.subjects.length; });
+  let arr1 = people.filter(x => x.subjects.length > 0 );
+  totalSubjects = arr1.map(obj => obj.subjects ).reduce( function(p,c) {return p + c.length} ,0);
   return totalSubjects;
 }
 
 function checkIngredients(menu, ingredient) {
   if (menu === undefined) throw new Error("menu is required");
   if (!ingredient) throw new Error("ingredient is required");
-  return (menu.filter(function (x) { return (x.ingredients.includes(ingredient)) }).length > 0);
+  return (menu.filter(menuItem => menuItem.ingredients.includes(ingredient) ).length > 0);
 }
 
 function duplicateNumbers(arr1, arr2) {
