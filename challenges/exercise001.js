@@ -49,7 +49,7 @@ function getMeanScore(scores) {
   if (scores === undefined) throw new Error("scores is required");
 
   let mean = scores.reduce((a, b) => a + b) / scores.length;
-  return ((mean * 100) % 100 === 0) ? mean : mean = parseFloat(mean.toFixed(2));
+  return ((mean * 100) % 100 === 0) ? mean : parseFloat(mean.toFixed(2));
 }
 
 function simpleFizzBuzz(n) {
