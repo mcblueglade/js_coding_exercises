@@ -22,7 +22,7 @@ const reverseNumber = n => {
 
 const sumArrays = arrs => {
   if (arrs === undefined) throw new Error("arrs is required");
-  return arrs.reduce((p, c) => p + eval(c.join("+")), 0);
+  return arrs.reduce((p, c) => p + c.reduce((a, b) => a + b, 0), 0);
 };
 
 const arrShift = arr => {
