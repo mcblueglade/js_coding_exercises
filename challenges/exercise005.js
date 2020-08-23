@@ -17,12 +17,12 @@ const count1sand0s = str => {
 
 const reverseNumber = n => {
   if (n === undefined) throw new Error("n is required");
-  // Your code here!
+  return parseInt(n.toString().split("").reverse().join("").replace(/^0+/, ''));
 };
 
 const sumArrays = arrs => {
   if (arrs === undefined) throw new Error("arrs is required");
-  // Your code here!
+  return arrs.reduce((p, c) => p + eval(c.join("+")), 0);
 };
 
 const arrShift = arr => {
