@@ -39,9 +39,7 @@ function getSquareRoots(nums) {
 function findSentencesContaining(sentences, str) {
   if (!sentences) throw new Error("sentences is required");
   if (!str) throw new Error("str is required");
-
-  var re = new RegExp(str, 'gi')
-  return sentences.filter(element => element.match(re));
+  return sentences.filter(element => element.toLowerCase().includes(str.toLowerCase()));
 }
 
 function getLongestSides(triangles) {

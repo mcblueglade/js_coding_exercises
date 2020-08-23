@@ -7,12 +7,7 @@ const findNextNumber = (nums, n) => {
 
 const count1sand0s = str => {
   if (str === undefined) throw new Error("str is required");
-
-  var dict = { 0: 0 };
-  [...str].forEach(c => {
-    c in dict ? dict[c] += 1 : dict[c] = 1;
-  });
-  return dict;
+  return [...str].reduce((p, c) => { p.hasOwnProperty(c) ? p[c] += 1 : p[c] = 1; return p; }, { 0: 0 });
 };
 
 const reverseNumber = n => {
@@ -27,18 +22,18 @@ const sumArrays = arrs => {
 
 const arrShift = arr => {
   if (arr === undefined) throw new Error("arr is required");
-  // Your code here!
+  return arr.map((x, i) => i == 0 ? arr.splice(-1, 1, x)[0] : x);
 };
 
 const findNeedle = (haystack, searchTerm) => {
   if (haystack === undefined) throw new Error("haystack is required");
   if (searchTerm === undefined) throw new Error("searchTerm is required");
-  // Your code here!
+  return Object.values(haystack).reduce((p, c) => p || (typeof (c) === "string" && c.toLowerCase().includes(searchTerm.toLowerCase())), false);
 };
 
 const getWordFrequencies = str => {
   if (str === undefined) throw new Error("str is required");
-  // Your code here!
+  return str.replace(/[^\w\s]/g, "").toLowerCase().split(" ").reduce((count, word) => { count[word] = count.hasOwnProperty(word) ? count[word] + 1 : 1; return count; }, {});
 };
 
 module.exports = {
