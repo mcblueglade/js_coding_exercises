@@ -28,12 +28,14 @@ const arrShift = arr => {
 const findNeedle = (haystack, searchTerm) => {
   if (haystack === undefined) throw new Error("haystack is required");
   if (searchTerm === undefined) throw new Error("searchTerm is required");
-  return Object.values(haystack).reduce((p, c) => p || (typeof (c) === "string" && c.toLowerCase().includes(searchTerm.toLowerCase())), false);
+  return Object.values(haystack).
+    reduce((p, c) => p || (typeof (c) === "string" && c.toLowerCase().includes(searchTerm.toLowerCase())), false);
 };
 
 const getWordFrequencies = str => {
   if (str === undefined) throw new Error("str is required");
-  return str.replace(/[^\w\s]/g, "").toLowerCase().split(" ").reduce((count, word) => { count[word] = count.hasOwnProperty(word) ? count[word] + 1 : 1; return count; }, {});
+  return str.replace(/[^\w\s]/g, "").toLowerCase().split(" ").
+    reduce((count, word) => { count[word] = count.hasOwnProperty(word) ? count[word] + 1 : 1; return count; }, {});
 };
 
 module.exports = {
