@@ -120,16 +120,34 @@ describe("getComplementaryDNA", () => {
         }).toThrow("a String must be passed");
     });
 
-    test("if string is empty then return an empty string", () => {
+    test("if DNA string is empty then return an empty string", () => {
         expect(getComplementaryDNA("")).toBe("");
     });
 
+    test("if string not a valid DNA sequence then return an empty string", () => {
+        expect(getComplementaryDNA("")).toBe("");
+        expect(getComplementaryDNA("hjk")).toBe("");
+        expect(getComplementaryDNA("LKR")).toBe("");
+    });
+
+    test("if DNA string has mixed valid and invalid sequence then return string with valid elements only", () => {
+        expect(getComplementaryDNA("")).toBe("");
+        expect(getComplementaryDNA("hjk")).toBe("");
+        expect(getComplementaryDNA("LPE")).toBe("");
+        expect(getComplementaryDNA("LKGRT")).toBe("CA");
+    });
+
+
     test("string of complementary DNA elements map correctly: T <-> A, C <-> G", () => {
         expect(getComplementaryDNA("TAGC")).toBe("ATCG");
+        expect(getComplementaryDNA("TGCACCTTGGAATG")).toBe("ACGTGGAACCTTAC");
         expect(getComplementaryDNA("C")).toBe("G");
         expect(getComplementaryDNA("A")).toBe("T");
         expect(getComplementaryDNA("G")).toBe("C");
         expect(getComplementaryDNA("T")).toBe("A");
+        expect(getComplementaryDNA("TG")).toBe("AC");
+        expect(getComplementaryDNA("TGCA")).toBe("ACGT");
+        expect(getComplementaryDNA("GTA")).toBe("CAT");
     });
 
     test("if input string contains mixed case complementaty DNA elements map correctly: T <-> A, C <-> G", () => {
