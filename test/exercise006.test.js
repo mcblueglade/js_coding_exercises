@@ -1,6 +1,6 @@
 const {
     sumMultiples,
-    //isValidDNA,  
+    isValidDNA,
     //getComplementaryDNA,
     //isItPrime,
     //createMatrix,
@@ -60,6 +60,35 @@ describe("sumMultiples", () => {
     });
 });
 
+describe("isValidDNA", () => {
+    test("tests if string is not passed as a parameter an error is thrown", () => {
+        expect(() => {
+            isValidDNA();
+        }).toThrow("str is required");
+
+        //Boolean parameter
+        expect(() => {
+            isValidDNA(true);
+        }).toThrow("a String must be passed");
+    });
+
+    test("test if string contains DNA characters: C, G, A or T", () => {
+        expect(isValidDNA("TAGCGACTCTGGGAACCTT")).toBe(true);
+        expect(isValidDNA("TAGC")).toBe(true);
+        expect(isValidDNA("AG")).toBe(true);
+        expect(isValidDNA("CT")).toBe(true);
+        expect(isValidDNA("GTA")).toBe(true);
+        expect(isValidDNA("T")).toBe(true);
+        expect(isValidDNA("C")).toBe(true);
+        expect(isValidDNA("G")).toBe(true);
+        expect(isValidDNA("A")).toBe(true);
+    });
+
+    test("returns false if string does not contain DNA characters: C, G, A or T", () => {
+        expect(isValidDNA("TAGCGADTCTGGGAARCTT")).toBe(false);
+    });
+
+});
 
 describe("areWeCovered", () => {
     test("if the correct arguments have been passed", () => {

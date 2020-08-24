@@ -24,7 +24,14 @@ const sumMultiples = arr => {
  */
 const isValidDNA = str => {
   if (str === undefined) throw new Error("str is required");
+  if (typeof (str) !== "string") throw new Error("a String must be passed");
 
+  return [...str].reduce((p, c) => {
+    if (p === true) {
+      p = p && ['C', 'G', 'T', 'A'].includes(c.toUpperCase());
+    }
+    return p;
+  }, true);
 };
 
 /**
@@ -87,7 +94,7 @@ const areWeCovered = (staff, day) => {
   if (staff.length === 0) { return false; }
 
   const staffRequiredtoBeCovered = 3;
-  
+
   return staff.reduce((pUser, cUser) => {
     pUser = pUser + cUser.rota.reduce((dayCount, currDay) => {
       if (dayCount < 1) {
