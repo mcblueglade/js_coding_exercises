@@ -45,7 +45,23 @@ const isValidDNA = str => {
  */
 const getComplementaryDNA = str => {
   if (str === undefined) throw new Error("str is required");
+  if (typeof (str) !== "string") throw new Error("a String must be passed");
 
+  if (str.length === 0) return "";
+
+  // Mapping => T <-> A, C <-> G
+  return [...str].map(c => {
+    switch (c.toUpperCase()) {
+      case 'T':
+        return 'A';
+      case 'A':
+        return 'T';
+      case 'C':
+        return 'G';
+      default:
+        return 'C';
+    }
+  }).reduce((p, c) => p + c, "");
 };
 
 /**

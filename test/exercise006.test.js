@@ -1,7 +1,7 @@
 const {
     sumMultiples,
     isValidDNA,
-    //getComplementaryDNA,
+    getComplementaryDNA,
     //isItPrime,
     //createMatrix,
     areWeCovered
@@ -61,7 +61,7 @@ describe("sumMultiples", () => {
 });
 
 describe("isValidDNA", () => {
-    test("tests if string is not passed as a parameter an error is thrown", () => {
+    test("if string is not passed as a parameter an error is thrown", () => {
         expect(() => {
             isValidDNA();
         }).toThrow("str is required");
@@ -81,7 +81,7 @@ describe("isValidDNA", () => {
         expect(isValidDNA("R")).toBe(false);
     });
 
-    test("test if string contains DNA characters: C, G, A or T", () => {
+    test("if string contains DNA characters: C, G, A or T", () => {
         expect(isValidDNA("TAGCGACTCTGGGAACCTT")).toBe(true);
         expect(isValidDNA("TAGC")).toBe(true);
         expect(isValidDNA("AG")).toBe(true);
@@ -93,7 +93,7 @@ describe("isValidDNA", () => {
         expect(isValidDNA("A")).toBe(true);
     });
 
-    test("test if string contains mixed case DNA characters: C, G, A or T", () => {
+    test("if string contains mixed case DNA characters: C, G, A or T", () => {
         expect(isValidDNA("TAGCgACTgTGGGAaCCtT")).toBe(true);
         expect(isValidDNA("TaGC")).toBe(true);
         expect(isValidDNA("ctagta")).toBe(true);
@@ -108,6 +108,39 @@ describe("isValidDNA", () => {
     });
 });
 
+describe("getComplementaryDNA", () => {
+    test("if string is not passed as a parameter an error is thrown", () => {
+        expect(() => {
+            getComplementaryDNA();
+        }).toThrow("str is required");
+
+        //Boolean parameter
+        expect(() => {
+            getComplementaryDNA(true);
+        }).toThrow("a String must be passed");
+    });
+
+    test("if string is empty then return an empty string", () => {
+        expect(getComplementaryDNA("")).toBe("");
+    });
+
+    test("string of complementary DNA elements map correctly: T <-> A, C <-> G", () => {
+        expect(getComplementaryDNA("TAGC")).toBe("ATCG");
+        expect(getComplementaryDNA("C")).toBe("G");
+        expect(getComplementaryDNA("A")).toBe("T");
+        expect(getComplementaryDNA("G")).toBe("C");
+        expect(getComplementaryDNA("T")).toBe("A");
+    });
+
+    test("if input string contains mixed case complementaty DNA elements map correctly: T <-> A, C <-> G", () => {
+        expect(getComplementaryDNA("tgaacga")).toBe("ACTTGCT");
+        expect(getComplementaryDNA("c")).toBe("G");
+        expect(getComplementaryDNA("a")).toBe("T");
+        expect(getComplementaryDNA("g")).toBe("C");
+        expect(getComplementaryDNA("t")).toBe("A");
+    });
+});
+
 describe("areWeCovered", () => {
     test("if the correct arguments have been passed", () => {
         expect(() => {
@@ -118,7 +151,7 @@ describe("areWeCovered", () => {
         }).toThrow("day is required");
     });
 
-    test("test if there are no staff at all", () => {
+    test("if there are no staff at all", () => {
         expect(areWeCovered([], "Sunday")).toBe(false);
         expect(areWeCovered([], "Monday")).toBe(false);
         expect(areWeCovered([], "Tueday")).toBe(false);
@@ -128,7 +161,7 @@ describe("areWeCovered", () => {
         expect(areWeCovered([], "Saturday")).toBe(false);
     });
 
-    test("test if there are staff for a minumum weekly rota setup", () => {
+    test("if there are staff for a minumum weekly rota setup", () => {
         const staff = [
             { name: "gary", rota: [] },
             { name: "sally", rota: ["Tuesday"] },
@@ -144,8 +177,7 @@ describe("areWeCovered", () => {
         expect(areWeCovered(staff, "Tuesday")).toBe(true);
     });
 
-
-    test("test if there are staff but only 3 or less are scheduled to work for a particular day", () => {
+    test("if there are staff but only 3 or less are scheduled to work for a particular day", () => {
         const staff = [
             { name: "gary", rota: ["Wednesday", "Friday"] },
             { name: "sally", rota: ["Sunday", "Friday"] },
@@ -176,7 +208,7 @@ describe("areWeCovered", () => {
         expect(areWeCovered(staff, "Friday")).toBe(true);
     });
 
-    test("test if there are staff for each day of the week", () => {
+    test("if there are staff for each day of the week", () => {
         const staff = [
             { name: "gary", rota: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"] },
             { name: "sally", rota: ["Sunday", "Thursday"] },
@@ -197,7 +229,7 @@ describe("areWeCovered", () => {
         expect(areWeCovered(staff, "Saturday")).toBe(true);
     });
 
-    test("tests if the rota and parameters are case insensitive", () => {
+    test("if the rota and parameters are case insensitive", () => {
         const staff = [
             { name: "gary", rota: ["tuesday", "wednesday", "SUNDAY"] },
             { name: "sally", rota: ["Sunday", "thUrsday"] },
