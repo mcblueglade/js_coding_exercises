@@ -70,21 +70,17 @@ const getScreentimeAlertList = (users, date) => {
   if (users === undefined) throw new Error("users is required");
   if (date === undefined) throw new Error("date is required");
 
+  const screenTimeToAlert = 100;
 
   return users.reduce((pUser, cUser) => {
-    //console.log("ScreenTime Sum:", cUser.screenTime.filter(st => st.date == date).
-    //  reduce((a, b) => Object.values(b.usage).reduce((sum, n) => sum + n, 0), 0));
 
-    let totalUserTime = cUser.screenTime.filter(st => st.date == date).
-      reduce((a, b) => Object.values(b.usage).reduce((sum, n) => sum + n, 0), 0);
+    let totalUserTime = cUser.screenTime.filter(st => st.date == date)
+      .reduce((a, b) => Object.values(b.usage).reduce((sum, n) => sum + n, 0), 0);
 
-    //console.log("ScreenTime Sum2:", totalUserTime); 
-    if (totalUserTime > 100) {
-      //console.log("Found User:", cUser.username);
+    if (totalUserTime > screenTimeToAlert) {
       pUser.push(cUser.username);
     }
 
-    //console.log("Found pUser :", pUser);
     return pUser;
   }, [])
 };
