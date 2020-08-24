@@ -49,18 +49,20 @@ const getComplementaryDNA = str => {
 
   if (str.length === 0) return "";
 
+  const dnaMappings = [["T", "A"], ["A", "T"], ["C", "G"], ["G", "C"]];
+
   // Mapping => T <-> A, C <-> G
   return [...str].map(c => {
-    switch (c.toUpperCase()) {
-      case 'T':
-        return 'A';
-      case 'A':
-        return 'T';
-      case 'C':
-        return 'G';
-      default:
-        return 'C';
-    }
+    return dnaMappings.reduce((pLetter, cLetter) => {
+
+      if (pLetter === "") {
+        if (cLetter[0] === c.toUpperCase()) {
+          pLetter = cLetter[1];
+        }
+      }
+      return pLetter;
+    }, "");
+
   }).reduce((p, c) => p + c, "");
 };
 
