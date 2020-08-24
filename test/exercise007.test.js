@@ -211,7 +211,7 @@ describe("getScreentimeAlertList", () => {
         expect(getScreentimeAlertList(userData, "2019-06-14")).toEqual(["donald_t_1962"]);
     });
 
-    test("returns array of users whose screen time is exactly 100 minutes", () => {
+    test("returns array of users whose screen time is exactly 101 minutes", () => {
         const userData = [
             {
                 username: "beth_1234",
@@ -236,7 +236,7 @@ describe("getScreentimeAlertList", () => {
                 username: "james_c_1985",
                 name: "James Combes",
                 screenTime: [
-                    { date: "2019-04-11", usage: { mapMyRun: 30, whatsApp: 50, facebook: 20, safari: 10 } },
+                    { date: "2019-04-11", usage: { mapMyRun: 30, whatsApp: 50, facebook: 20, safari: 1 } },
                     { date: "2019-05-04", usage: { mapMyRun: 78, whatsApp: 22, facebook: 0, safari: 16 } },
                     { date: "2019-06-14", usage: { mapMyRun: 0, whatsApp: 0, facebook: 0, safari: 31 } },
                 ]
