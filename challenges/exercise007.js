@@ -4,12 +4,12 @@
  */
 const sumDigits = n => {
   if (n === undefined) throw new Error("n is required");
+  if (typeof (n) !== "number" || (typeof (n) === "number" && n % 1 !== 0)) throw new Error("a number must be passed");
 
-  //console.log([...Array(n)]);
   return n.toString().split("").reduce((p, c) => p + parseInt(c), 0);
 };
 
-/**
+/** 
  * This function creates a range of numbers as an array. It received a start, an end and a step. 
  * Step is the gap between numbers in the range. For example, if start = 3, end = 11 and step = 2 
  * the resulting range would be: [3, 5, 7, 9, 11]

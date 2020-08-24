@@ -168,7 +168,9 @@ describe("isItPrime", () => {
         expect(() => {
             isItPrime(true);
         }).toThrow("a number must be passed");
-
+    });
+    
+    test("if number is passed and is not a float", () => {
         //Float with decimal places
         expect(() => {
             isItPrime(44.67);
@@ -218,7 +220,9 @@ describe("createMatrix", () => {
         expect(() => {
             createMatrix(true, "test");
         }).toThrow("a number must be passed");
+    });
 
+    test("if number is passed and is not a float", () => {
         //Float with decimal places
         expect(() => {
             createMatrix(44.67, "foobar");
