@@ -3,7 +3,7 @@ const {
     isValidDNA,
     getComplementaryDNA,
     isItPrime,
-    //createMatrix,
+    createMatrix,
     areWeCovered
 } = require("../challenges/exercise006");
 
@@ -137,7 +137,6 @@ describe("getComplementaryDNA", () => {
         expect(getComplementaryDNA("LKGRT")).toBe("CA");
     });
 
-
     test("string of complementary DNA elements map correctly: T <-> A, C <-> G", () => {
         expect(getComplementaryDNA("TAGC")).toBe("ATCG");
         expect(getComplementaryDNA("TGCACCTTGGAATG")).toBe("ACGTGGAACCTTAC");
@@ -182,7 +181,6 @@ describe("isItPrime", () => {
         expect(isItPrime(5)).toBe(true);
         expect(isItPrime(7)).toBe(true);
         expect(isItPrime(11)).toBe(true);
-        expect(isItPrime(11.00)).toBe(true);
         expect(isItPrime(13)).toBe(true);
         expect(isItPrime(19)).toBe(true);
         expect(isItPrime(23)).toBe(true);
@@ -202,6 +200,58 @@ describe("isItPrime", () => {
         expect(isItPrime(74)).toBe(false);
         expect(isItPrime(77)).toBe(false);
         expect(isItPrime(915)).toBe(false);
+    });
+
+    test("returns true if floating number is passed with non-factional decimal places is a prime", () => {
+        expect(isItPrime(11.00)).toBe(true);
+        expect(isItPrime(59.00)).toBe(true);
+    });
+});
+
+describe("createMatrix", () => {
+    test("if number is not passed then an error is thrown", () => {
+        expect(() => {
+            createMatrix();
+        }).toThrow("n is required");
+
+        //Boolean parameter
+        expect(() => {
+            createMatrix(true, "test");
+        }).toThrow("a number must be passed");
+
+        //Float with decimal places
+        expect(() => {
+            createMatrix(44.67, "foobar");
+        }).toThrow("a number must be passed");
+    });
+
+    test("returns a 3 x 3 array of filled elements", () => {
+        expect(createMatrix(3, "foo")).toEqual([["foo", "foo", "foo"], ["foo", "foo", "foo"], ["foo", "foo", "foo"]]);
+        expect(createMatrix(3, "88")).toEqual([["88", "88", "88"], ["88", "88", "88"], ["88", "88", "88"]]);
+        expect(createMatrix(3, "longerstring"))
+            .toEqual([["longerstring", "longerstring", "longerstring"],
+            ["longerstring", "longerstring", "longerstring"],
+            ["longerstring", "longerstring", "longerstring"]]);
+    });
+
+    test("returns a 2 x 2 array of filled elements", () => {
+        expect(createMatrix(2, "0")).toEqual([["0", "0"], ["0", "0"]]);
+        expect(createMatrix(2, "foo")).toEqual([["foo", "foo"], ["foo", "foo"]]);
+    });
+
+    test("returns a 1 x 1 array of filled elements", () => {
+        expect(createMatrix(1, "0")).toEqual([["0"]]);
+        expect(createMatrix(1, "foo")).toEqual([["foo"]]);
+    });
+
+    test("returns a empty array if zero passed", () => {
+        expect(createMatrix(0, "foo")).toEqual([]);
+    });
+
+    test("returns an array of empty elements", () => {
+        expect(createMatrix(1, "")).toEqual([[""]]);
+        expect(createMatrix(2, "")).toEqual([["", ""], ["", ""]]);
+        expect(createMatrix(3, "")).toEqual([["", "", ""], ["", "", ""], ["", "", ""]]);
     });
 });
 
@@ -242,7 +292,7 @@ describe("areWeCovered", () => {
         expect(areWeCovered(staff, "Tuesday")).toBe(true);
     });
 
-    test("if there are staff but only 3 or less are scheduled to work for a particular day", () => {
+    test("if there are staff but less than 3 are scheduled to work on any particular day", () => {
         const staff = [
             { name: "gary", rota: ["Wednesday", "Friday"] },
             { name: "sally", rota: ["Sunday", "Friday"] },
@@ -259,7 +309,7 @@ describe("areWeCovered", () => {
         expect(areWeCovered(staff, "Thursday")).toBe(false);
     });
 
-    test("returns true if there 3 or more staff scheduled to work", () => {
+    test("returns true if there at least 3 or more staff scheduled to work", () => {
         const staff = [
             { name: "gary", rota: ["Tuesday", "Wednesday", "Friday"] },
             { name: "sally", rota: ["Sunday", "Thursday"] },

@@ -94,8 +94,10 @@ const isItPrime = n => {
  */
 const createMatrix = (n, fill) => {
   if (n === undefined) throw new Error("n is required");
+  if (typeof (n) !== "number" || (typeof (n) === "number" && n % 1 !== 0)) throw new Error("a number must be passed");
   if (fill === undefined) throw new Error("fill is required");
 
+  return [...Array(n)].map(() => [...Array(n)].map(() => fill));
 };
 
 /**
