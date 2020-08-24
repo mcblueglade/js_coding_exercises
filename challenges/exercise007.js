@@ -99,17 +99,10 @@ const getScreentimeAlertList = (users, date) => {
  */
 const hexToRGB = hexStr => {
   if (hexStr === undefined) throw new Error("hexStr is required");
+  //Check hexStr only contains letters [A-F] and numbers
+  if ( hexStr.match(/^#[0-9A-F]{6}$/i) === null ) throw new Error("A valid hexStr is required");
 
-  //console.log(hexStr.replace(/^#?([a-f\d])([a-f\d])([a-f\d])$/i
-  //  , (m, r, g, b) => '#' + r + r + g + g + b + b)
-  //  .substring(1).match(/.{2}/g)
-  //  .map(x => parseInt(x, 16))
-  //  .reduce((p, c, i, arr) => {
-  //    p = i === arr.length - 1 ? p + c + ")" : p + c + ",";
-  //    return p;
-  //  }, "rbg("));
-
-  return hexStr.replace(/^#?([a-f\d])([a-f\d])([a-f\d])$/i
+  return hexStr.toUpperCase().replace(/^#?([a-f\d])([a-f\d])([a-f\d])$/i
     , (m, r, g, b) => '#' + r + r + g + g + b + b)
     .substring(1).match(/.{2}/g)
     .map(x => parseInt(x, 16))

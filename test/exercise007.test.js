@@ -2,7 +2,7 @@ const {
     sumDigits,
     createRange,
     getScreentimeAlertList,
-    //hexToRGB,
+    hexToRGB,
     //findWinner
 } = require("../challenges/exercise007");
 
@@ -255,5 +255,41 @@ describe("getScreentimeAlertList", () => {
         expect(getScreentimeAlertList(userData, "2019-04-11")).toEqual(["james_c_1985"]);
     });
 });
+
+describe("hexToRGB", () => {
+    test("if hexStr has been passed", () => {
+        expect(() => {
+            hexToRGB();
+        }).toThrow("hexStr is required");
+
+        expect(() => {
+            hexToRGB("");
+        }).toThrow("hexStr is required");
+
+        expect(() => {
+            hexToRGB("@998822");
+        }).toThrow("A valid hexStr is required");
+
+        expect(() => {
+            hexToRGB("#99JHG2");
+        }).toThrow("A valid hexStr is required");
+
+        expect(() => {
+            hexToRGB("#99884");
+        }).toThrow("A valid hexStr is required");
+
+        expect(() => {
+            hexToRGB("#FF399884");
+        }).toThrow("A valid hexStr is required");
+    });
+
+    test("returns the convertd rgb value from hexidecimal", () => {
+        expect(hexToRGB("#FF1133")).toBe("rgb(255,17,51)");
+        expect(hexToRGB("#000000")).toBe("rgb(0,0,0)");
+        expect(hexToRGB("#FFFFFF")).toBe("rgb(255,255,255)");
+        expect(hexToRGB("#D8BFD9")).toBe("rgb(216,191,217)");
+    });
+});
+
 
 
