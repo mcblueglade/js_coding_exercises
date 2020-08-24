@@ -72,6 +72,15 @@ describe("isValidDNA", () => {
         }).toThrow("a String must be passed");
     });
 
+    test("returns false if string does not contain DNA characters: C, G, A or T", () => {
+        expect(isValidDNA("TAGCGADTCTGGGAARCTT")).toBe(false);
+        expect(isValidDNA("")).toBe(false);
+        expect(isValidDNA("RHJISBNSWSSD")).toBe(false);
+        expect(isValidDNA("D")).toBe(false);
+        expect(isValidDNA("HH")).toBe(false);
+        expect(isValidDNA("R")).toBe(false);
+    });
+
     test("test if string contains DNA characters: C, G, A or T", () => {
         expect(isValidDNA("TAGCGACTCTGGGAACCTT")).toBe(true);
         expect(isValidDNA("TAGC")).toBe(true);
@@ -84,10 +93,19 @@ describe("isValidDNA", () => {
         expect(isValidDNA("A")).toBe(true);
     });
 
-    test("returns false if string does not contain DNA characters: C, G, A or T", () => {
-        expect(isValidDNA("TAGCGADTCTGGGAARCTT")).toBe(false);
+    test("test if string contains mixed case DNA characters: C, G, A or T", () => {
+        expect(isValidDNA("TAGCgACTgTGGGAaCCtT")).toBe(true);
+        expect(isValidDNA("TaGC")).toBe(true);
+        expect(isValidDNA("ctagta")).toBe(true);
+        expect(isValidDNA("Ag")).toBe(true);
+        expect(isValidDNA("cT")).toBe(true);
+        expect(isValidDNA("GtA")).toBe(true);
+        expect(isValidDNA("t")).toBe(true);
+        expect(isValidDNA("c")).toBe(true);
+        expect(isValidDNA("g")).toBe(true);
+        expect(isValidDNA("a")).toBe(true);
+        expect(isValidDNA("ryh")).toBe(false);
     });
-
 });
 
 describe("areWeCovered", () => {

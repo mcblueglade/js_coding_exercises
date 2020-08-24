@@ -26,6 +26,8 @@ const isValidDNA = str => {
   if (str === undefined) throw new Error("str is required");
   if (typeof (str) !== "string") throw new Error("a String must be passed");
 
+  if (str.length === 0) return false;
+
   return [...str].reduce((p, c) => {
     if (p === true) {
       p = p && ['C', 'G', 'T', 'A'].includes(c.toUpperCase());
