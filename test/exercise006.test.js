@@ -2,7 +2,7 @@ const {
     sumMultiples,
     isValidDNA,
     getComplementaryDNA,
-    //isItPrime,
+    isItPrime,
     //createMatrix,
     areWeCovered
 } = require("../challenges/exercise006");
@@ -159,6 +159,52 @@ describe("getComplementaryDNA", () => {
     });
 });
 
+describe("isItPrime", () => {
+    test("if number is not passed then an error is thrown", () => {
+        expect(() => {
+            isItPrime();
+        }).toThrow("n is required");
+
+        //Boolean parameter
+        expect(() => {
+            isItPrime(true);
+        }).toThrow("a number must be passed");
+
+        //Float with decimal places
+        expect(() => {
+            isItPrime(44.67);
+        }).toThrow("a number must be passed");
+    });
+
+    test("returns true if number is prime", () => {
+        expect(isItPrime(2)).toBe(true);
+        expect(isItPrime(3)).toBe(true);
+        expect(isItPrime(5)).toBe(true);
+        expect(isItPrime(7)).toBe(true);
+        expect(isItPrime(11)).toBe(true);
+        expect(isItPrime(11.00)).toBe(true);
+        expect(isItPrime(13)).toBe(true);
+        expect(isItPrime(19)).toBe(true);
+        expect(isItPrime(23)).toBe(true);
+        expect(isItPrime(41)).toBe(true);
+        expect(isItPrime(59)).toBe(true);
+        expect(isItPrime(83)).toBe(true);
+        expect(isItPrime(83)).toBe(true);
+        expect(isItPrime(89)).toBe(true);
+        expect(isItPrime(97)).toBe(true);
+    });
+
+    test("returns false if number is not a prime", () => {
+        expect(isItPrime(0)).toBe(false);
+        expect(isItPrime(1)).toBe(false);
+        expect(isItPrime(20)).toBe(false);
+        expect(isItPrime(35)).toBe(false);
+        expect(isItPrime(74)).toBe(false);
+        expect(isItPrime(77)).toBe(false);
+        expect(isItPrime(915)).toBe(false);
+    });
+});
+
 describe("areWeCovered", () => {
     test("if the correct arguments have been passed", () => {
         expect(() => {
@@ -177,6 +223,7 @@ describe("areWeCovered", () => {
         expect(areWeCovered([], "Thursday")).toBe(false);
         expect(areWeCovered([], "Friday")).toBe(false);
         expect(areWeCovered([], "Saturday")).toBe(false);
+        expect(areWeCovered([], "")).toBe(false);
     });
 
     test("if there are staff for a minumum weekly rota setup", () => {
