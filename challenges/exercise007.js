@@ -22,10 +22,15 @@ const sumDigits = n => {
 const createRange = (start, end, step) => {
   if (start === undefined) throw new Error("start is required");
   if (end === undefined) throw new Error("end is required");
+  if (typeof (start) !== "number" || (typeof (start) === "number" && start % 1 !== 0)) throw new Error("start number must be passed");
+  if (typeof (end) !== "number" || (typeof (end) === "number" && end % 1 !== 0)) throw new Error("end number must be passed");
 
-  //if (step === undefined) { step = 1;}
-  const stepped = step === undefined ? 1 : step;
-  //console.log(Array(Math.floor((end - start) / stepped) + 1).fill().map((_, idx) => start + (idx * stepped)));
+  if (start > end) throw new Error("start cannot be greater than end value");
+
+  const stepped = (step === undefined) ? 1 : step === 0 ? 1 : step;
+
+  if (stepped < 0) throw new Error("step cannot be less than zero");
+
   return Array(Math.floor((end - start) / stepped) + 1).fill().map((_, idx) => start + (idx * stepped));
 };
 
