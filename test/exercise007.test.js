@@ -84,10 +84,16 @@ describe("createRange", () => {
         }).toThrow("start cannot be greater than end value");
     });
 
-    test("step cannot be less than zero", () => {
+    test("start cannot be greater than end value", () => {
+        expect(() => {
+            createRange(456, 32, 20);
+        }).toThrow("start cannot be greater than end value");
+    });
+
+    test("start cannot be less than end value", () => {
         expect(() => {
             createRange(34, 346, -1);
-        }).toThrow("step cannot be less than zero");
+        }).toThrow("start cannot be less than end value");
     });
 
     test("returns a stepped array with last item in array as the end parameter value", () => {
@@ -124,6 +130,12 @@ describe("createRange", () => {
         expect(createRange(-3450, -3445, 1)).toEqual([-3450, -3449, -3448, -3447, -3446, -3445]);
         expect(createRange(-25, -5, 5)).toEqual([-25, -20, -15, -10, -5]);
         expect(createRange(-25, -12, 3)).toEqual([-25, -22, -19, -16, -13]);
+    });
+
+    test("returns a array where the step is negative", () => {
+        expect(createRange(10, 2, -2)).toEqual([10, 8, 6, 4, 2]);
+        expect(createRange(-5, -26, -5)).toEqual([-5, -10, -15, -20, -25]);
+        expect(createRange(-90, -102, -2)).toEqual([-90, -92, -94, -96, -98, -100, -102]);
     });
 });
 

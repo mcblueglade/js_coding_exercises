@@ -25,13 +25,17 @@ const createRange = (start, end, step) => {
   if (typeof (start) !== "number" || (typeof (start) === "number" && start % 1 !== 0)) throw new Error("start number must be passed");
   if (typeof (end) !== "number" || (typeof (end) === "number" && end % 1 !== 0)) throw new Error("end number must be passed");
 
-  if (start > end) throw new Error("start cannot be greater than end value");
-
   const stepped = (step === undefined) ? 1 : step === 0 ? 1 : step;
 
-  if (stepped < 0) throw new Error("step cannot be less than zero");
+  if (start > end && stepped > 0) throw new Error("start cannot be greater than end value");
+  if (start < end && stepped < 0) throw new Error("start cannot be less than end value");
 
-  return Array(Math.floor((end - start) / stepped) + 1).fill().map((_, idx) => start + (idx * stepped));
+  if (stepped > 0) {
+    return Array(Math.floor((end - start) / stepped) + 1).fill().map((_, idx) => start + (idx * stepped));
+  }
+  else {
+    return Array(Math.abs(Math.floor((end - start) / stepped)) + 1).fill().map((_, idx) => start + (idx * stepped));
+  }
 };
 
 /**
