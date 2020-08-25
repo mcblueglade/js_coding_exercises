@@ -134,7 +134,7 @@ const findWinner = board => {
       if (c.length !== 3) { p = false; }
     }
     return p;
-  }, true)) throw new Error("board is not correct size");
+  }, true)) throw new Error("board row length is not correct size");
 
   const winningLines = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
   const cellCoordinates = [[0, 0], [0, 1], [0, 2], [1, 0], [1, 1], [1, 2], [2, 0], [2, 1], [2, 2]];

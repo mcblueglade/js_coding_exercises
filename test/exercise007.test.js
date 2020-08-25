@@ -399,7 +399,7 @@ describe("findWinner", () => {
         //Test object passed is of the correct size
         expect(() => {
             findWinner(board_13);
-        }).toThrow("board is not correct size");
+        }).toThrow("board row length is not correct size");
 
         //Test object passed is of the correct size
         expect(() => {
