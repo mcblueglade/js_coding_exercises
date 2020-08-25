@@ -3,7 +3,7 @@ const {
     createRange,
     getScreentimeAlertList,
     hexToRGB,
-    //findWinner
+    findWinner
 } = require("../challenges/exercise007");
 
 describe("sumDigits", () => {
@@ -291,5 +291,142 @@ describe("hexToRGB", () => {
     });
 });
 
+describe("findWinner", () => {
+    const board_1 = [
+        ["X", "0", null],
+        ["X", null, "0"],
+        ["X", null, "0"]
+    ];
+
+    const board_2 = [
+        [null, "0", "X"],
+        ["X", "0", null],
+        ["X", "0", "0"]
+    ];
+
+    const board_3 = [
+        [null, null, "X"],
+        ["X", "0", "X"],
+        ["0", "0", "X"]
+    ];
+
+    const board_4 = [
+        ["0", "0", "0"],
+        ["X", null, null],
+        ["X", null, "0"]
+    ];
+
+    const board_5 = [
+        ["X", "0", "0"],
+        ["X", "X", "X"],
+        [null, "0", null]
+    ];
+
+    const board_6 = [
+        ["X", "0", null],
+        [null, null, "0"],
+        ["0", "0", "0"]
+    ];
+
+    const board_7 = [
+        ["0", "X", null],
+        [null, "0", "0"],
+        ["X", "X", "0"]
+    ];
+
+    const board_8 = [
+        ["0", null, "X"],
+        [null, "X", "0"],
+        ["X", "X", null]
+    ];
+
+    const board_9 = [
+        [null, null, null],
+        [null, null, null],
+        [null, null, null]
+    ];
+
+    const board_10 = [
+        ["X", null, "0"],
+        [null, null, "X"],
+        ["0", "0", null]
+    ];
+
+    const board_11 = [
+        ["X", "X", "X"],
+        ["X", "X", "X"],
+        ["X", "X", "X"]
+    ];
+
+    const board_12 = [
+        ["0", "0", "0"],
+        ["0", "0", "0"],
+        ["0", "0", "0"]
+    ];
+    const board_13 = [
+        ["X", null, "0"],
+        ["0", "X"],
+        ["X", null, "0"]
+    ];
+
+    const board_14 = [
+        [null, "X", "X"],
+        ["0", "0", null]
+    ];
+
+    test("if board object has been passed", () => {
+        expect(() => {
+            findWinner();
+        }).toThrow("board is required");
+
+        //Test empty object passed
+        expect(() => {
+            findWinner([]);
+        }).toThrow("board not of correct size");
+
+        //Empty parameter passed
+        expect(() => {
+            findWinner("");
+        }).toThrow("board must be an object");
+
+        //Invalid parameter type passed
+        expect(() => {
+            findWinner(true);
+        }).toThrow("board must be an object");
+    });
+
+    test("if board object has the correct size", () => {
+        //Test object passed is of the correct size
+        expect(() => {
+            findWinner(board_13);
+        }).toThrow("board is not correct size");
+
+        //Test object passed is of the correct size
+        expect(() => {
+            findWinner(board_14);
+        }).toThrow("board not of correct size");
+    });
+
+    test("returns the winning value (0 or X) of the total 8 winning line combinations", () => {
+        expect(findWinner(board_1)).toBe("X");
+        expect(findWinner(board_2)).toBe("0");
+        expect(findWinner(board_3)).toBe("X");
+        expect(findWinner(board_4)).toBe("0");
+        expect(findWinner(board_5)).toBe("X");
+        expect(findWinner(board_6)).toBe("0");
+        expect(findWinner(board_7)).toBe("0");
+        expect(findWinner(board_8)).toBe("X");
+    });
+
+    test("returns null if there are no winning line combinations to be found", () => {
+        expect(findWinner(board_9)).toBe(null);
+        expect(findWinner(board_10)).toBe(null);
+    });
+
+    test("returns first winning line combination if many to be found", () => {
+        expect(findWinner(board_11)).toBe("X");
+        expect(findWinner(board_12)).toBe("0");
+    });
+});
 
 

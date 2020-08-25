@@ -99,10 +99,10 @@ const getScreentimeAlertList = (users, date) => {
  */
 const hexToRGB = hexStr => {
   if (hexStr === undefined) throw new Error("hexStr is required");
-  //Check hexStr only contains letters [A-F] and numbers
-  if ( hexStr.match(/^#[0-9A-F]{6}$/i) === null ) throw new Error("A valid hexStr is required");
+  //Check hexStr only contains letters [A-F] and numbers and first character must be "#"
+  if (hexStr.match(/^#[0-9A-F]{6}$/i) === null) throw new Error("A valid hexStr is required");
 
-  return hexStr.toUpperCase().replace(/^#?([a-f\d])([a-f\d])([a-f\d])$/i
+  return hexStr.replace(/^#?([a-f\d])([a-f\d])([a-f\d])$/i
     , (m, r, g, b) => '#' + r + r + g + g + b + b)
     .substring(1).match(/.{2}/g)
     .map(x => parseInt(x, 16))
@@ -125,73 +125,43 @@ const hexToRGB = hexStr => {
  */
 const findWinner = board => {
   if (board === undefined) throw new Error("board is required");
+  if (typeof (board) !== "object") throw new Error("board must be an object");
+  if (board.length !== 3) throw new Error("board not of correct size");
 
-  const winningSets = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
+  // Check if we have a board with 3 rows and each that row must have 3 elements
+  if (!board.reduce((p, c) => {
+    if (p) {
+      if (c.length !== 3) { p = false; }
+    }
+    return p;
+  }, true)) throw new Error("board is not correct size");
+
+  const winningLines = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
   const cellCoordinates = [[0, 0], [0, 1], [0, 2], [1, 0], [1, 1], [1, 2], [2, 0], [2, 1], [2, 2]];
 
   const getArrayCoordinates = num => {
-
     return cellCoordinates[num];
-
-    /*
-    var coordinates = [2, 2];
-    switch (num) {
-      case 1:
-        coordinates = [0, 0];
-        break;
-      case 2:
-        coordinates = [0, 1];
-        break;
-      case 3:
-        coordinates = [0, 2];
-        break;
-      case 4:
-        coordinates = [1, 0];
-        break;
-      case 5:
-        coordinates = [1, 1];
-        break;
-      case 6:
-        coordinates = [1, 2];
-        break;
-      case 7:
-        coordinates = [2, 0];
-        break;
-      case 8:
-        coordinates = [2, 1];
-        break;
-      //default:
-        //already defaulted
-    }
-
-    return coordinates; */
   }
 
-  return winningSets.reduce((p, c) => {
-
-    //console.log("Row_BeforeLastPreviousValue: ", p);
-
+  return winningLines.reduce((p, c) => {
     if (p === null) {
       p = c.reduce((pValue, currCell, i) => {
-        //console.log("Cell_BeforeLastPreviousValue: ", pValue);
 
+        // Having already checked the value first value in the line, 
+        // any subsequent values with a "null" renders this line from being a winner, 
+        // so just return
         if (pValue == null && i > 0) { return pValue; }
 
         let coordinates = getArrayCoordinates(currCell);
         let cellValue = board[coordinates[0]][coordinates[1]];
 
-        //console.log("Coordinates: ", coordinates);
-        //console.log("CellValue: ", cellValue);
+        // If the previous value does not match the current value 
+        // and this is not the first element in the line return null, 
+        // otherwise return the cell value.
+        return pValue = (cellValue !== pValue && i !== 0) ? null : cellValue;
 
-        if (cellValue !== pValue && i !== 0) { pValue = null; }
-        else { pValue = cellValue; }
-
-        //console.log("Cell_AfterLastPreviousValue: ", pValue);
-
-        return pValue;
       }, null);
     }
-    //console.log("Row_AfterLastPreviousValue: ", p);
     return p;
   }, null);
 };
