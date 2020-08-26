@@ -77,10 +77,10 @@ const getScreentimeAlertList = (users, date) => {
   const screenTimeToAlert = 100;
 
   return users.reduce((pUser, cUser) => {
-    cUser.screenTime.filter(st => st.date === date)
-      .reduce((a, b) => Object.values(b.usage)
-        .reduce((sum, n) => sum + n, 0), 0) > screenTimeToAlert ? pUser.push(cUser.username) : pUser;
-
+    if (cUser.screenTime.filter(st => st.date === date)
+      .reduce((a, b) => Object.values(b.usage).reduce((sum, n) => sum + n, 0), 0) > screenTimeToAlert) {
+      pUser.push(cUser.username);
+    }
     return pUser;
   }, [])
 };
