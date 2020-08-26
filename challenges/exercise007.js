@@ -77,13 +77,9 @@ const getScreentimeAlertList = (users, date) => {
   const screenTimeToAlert = 100;
 
   return users.reduce((pUser, cUser) => {
-
-    let totalUserTime = cUser.screenTime.filter(st => st.date == date)
-      .reduce((a, b) => Object.values(b.usage).reduce((sum, n) => sum + n, 0), 0);
-
-    if (totalUserTime > screenTimeToAlert) {
-      pUser.push(cUser.username);
-    }
+    cUser.screenTime.filter(st => st.date == date)
+      .reduce((a, b) => Object.values(b.usage)
+        .reduce((sum, n) => sum + n, 0), 0) > screenTimeToAlert ? pUser.push(cUser.username) : pUser;
 
     return pUser;
   }, [])
@@ -110,10 +106,9 @@ const hexToRGB = hexStr => {
     , (m, r, g, b) => '#' + r + r + g + g + b + b)
     .substring(1).match(/.{2}/g)
     .map(x => parseInt(x, 16))
-    .reduce((p, c, i, arr) => {
-      p = i === arr.length - 1 ? p + c + ")" : p + c + ",";
-      return p;
-    }, "rgb(");
+    .reduce((p, c, i, arr) =>
+      p = i === arr.length - 1 ? p + c + ")" : p + c + ","
+      , "rgb(");
 };
 
 /**
@@ -133,12 +128,7 @@ const findWinner = board => {
   if (board.length !== 3) throw new Error("board not of correct size");
 
   // Check if we have a board with 3 rows and each that row must have 3 elements
-  if (!board.reduce((p, c) => {
-    if (p) {
-      if (c.length !== 3) { p = false; }
-    }
-    return p;
-  }, true)) throw new Error("board row length is not correct size");
+  if (!board.reduce((p, c) => p && c.length !== 3 ? false : p, true)) throw new Error("board row length is not correct size");
 
   const winningLines = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
   const cellCoordinates = [[0, 0], [0, 1], [0, 2], [1, 0], [1, 1], [1, 2], [2, 0], [2, 1], [2, 2]];
@@ -147,9 +137,9 @@ const findWinner = board => {
     return cellCoordinates[num];
   }
 
-  return winningLines.reduce((p, c) => {
-    if (p === null) {
-      p = c.reduce((pValue, currCell, i) => {
+  return winningLines.reduce((p, c) =>
+    p === null ?
+      c.reduce((pValue, currCell, i) => {
 
         // Having already checked the value first value in the line, 
         // any subsequent values with a "null" renders this line from being a winner, 
@@ -163,11 +153,9 @@ const findWinner = board => {
         // and this is not the first element in the line return null, 
         // otherwise return the cell value.
         return pValue = (cellValue !== pValue && i !== 0) ? null : cellValue;
-
-      }, null);
-    }
-    return p;
-  }, null);
+      }, null)
+      : p
+    , null);
 };
 
 module.exports = {

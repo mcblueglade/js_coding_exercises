@@ -8,12 +8,9 @@ const sumMultiples = arr => {
   if (arr === undefined) throw new Error("arr is required");
   if (!Array.isArray(arr)) throw new Error("an Array must be passed");
 
-  return arr.reduce((prevValue, currValue) => {
-    if (currValue % 3 === 0 || currValue % 5 === 0) {
-      prevValue += currValue;
-    }
-    return prevValue;
-  }, 0);
+  return arr.reduce((prevValue, currValue) =>
+    currValue % 3 === 0 || currValue % 5 === 0 ? prevValue += currValue : prevValue
+    , 0);
 };
 
 /**
@@ -28,12 +25,9 @@ const isValidDNA = str => {
 
   if (str.length === 0) return false;
 
-  return [...str].reduce((p, c) => {
-    if (p === true) {
-      p = p && ['C', 'G', 'T', 'A'].includes(c.toUpperCase());
-    }
-    return p;
-  }, true);
+  return [...str].reduce((p, c) =>
+    p === true ? p && ['C', 'G', 'T', 'A'].includes(c.toUpperCase()) : p
+    , true);
 };
 
 /**
@@ -53,16 +47,9 @@ const getComplementaryDNA = str => {
 
   // Mapping => T <-> A, C <-> G
   return [...str].map(c => {
-    return dnaMappings.reduce((pLetter, cLetter) => {
-
-      if (pLetter === "") {
-        if (cLetter[0] === c.toUpperCase()) {
-          pLetter = cLetter[1];
-        }
-      }
-      return pLetter;
-    }, "");
-
+    return dnaMappings.reduce((pLetter, cLetter) =>
+      pLetter === "" && cLetter[0] === c.toUpperCase() ? cLetter[1] : pLetter
+      , "");
   }).reduce((p, c) => p + c, "");
 };
 
@@ -120,15 +107,11 @@ const areWeCovered = (staff, day) => {
 
   const staffRequiredtoBeCovered = 3;
 
-  return staff.reduce((pUser, cUser) => {
-    pUser = pUser + cUser.rota.reduce((dayCount, currDay) => {
-      if (dayCount < 1) {
-        dayCount = currDay.toLowerCase() === day.toLowerCase() ? 1 : 0
-      }
-      return dayCount;
-    }, 0)
-    return pUser;
-  }, 0) >= staffRequiredtoBeCovered;
+  return staff.reduce((pUser, cUser) =>
+    pUser +
+    cUser.rota
+      .reduce((dayCount, currDay) => dayCount < 1 ? currDay.toLowerCase() === day.toLowerCase() ? 1 : 0 : dayCount, 0)
+    , 0) >= staffRequiredtoBeCovered;
 };
 
 module.exports = {
