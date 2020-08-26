@@ -7,7 +7,7 @@ const findNextNumber = (nums, n) => {
 
 const count1sand0s = str => {
   if (str === undefined) throw new Error("str is required");
-  return [...str].reduce((p, c) => { p.hasOwnProperty(c) ? p[c] += 1 : p[c] = 1; return p; }, { 0: 0 });
+  return [...str].reduce((p, c) => { p[c] ? p[c] += 1 : p[c] = 1; return p; }, { 0: 0 });
 };
 
 const reverseNumber = n => {
@@ -35,7 +35,7 @@ const findNeedle = (haystack, searchTerm) => {
 const getWordFrequencies = str => {
   if (str === undefined) throw new Error("str is required");
   return str.replace(/[^\w\s]/g, "").toLowerCase().split(" ")
-    .reduce((count, word) => { count[word] = count.hasOwnProperty(word) ? count[word] + 1 : 1; return count; }, {});
+    .reduce((count, word) => { count[word] = count[word] ? count[word] + 1 : 1; return count; }, {});
 };
 
 module.exports = {

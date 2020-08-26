@@ -1,6 +1,6 @@
 function getSquares(nums) {
   if (nums === undefined) throw new Error("nums is required");
-  return nums.map((num) => num ** 2);
+  return nums.map((num) => Math.pow(num,2));
 }
 
 function camelCaseWords(words) {

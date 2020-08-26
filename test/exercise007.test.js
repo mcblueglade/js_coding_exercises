@@ -100,7 +100,7 @@ describe("createRange", () => {
         expect(createRange(9, 18, 3)).toEqual([9, 12, 15, 18]);
         expect(createRange(100, 220, 20)).toEqual([100, 120, 140, 160, 180, 200, 220]);
         expect(createRange(17, 61, 7)).toEqual([17, 24, 31, 38, 45, 52, 59]);
-        expect(createRange(1, 1, 1)).toEqual([1]);;
+        expect(createRange(1, 1, 1)).toEqual([1]);
     });
 
     test("returns a stepped array with last item in array less than the end parameter value", () => {
