@@ -263,8 +263,51 @@ describe("getScreentimeAlertList", () => {
                 ]
             },
         ];
-
         expect(getScreentimeAlertList(userData, "2019-04-11")).toEqual(["james_c_1985"]);
+    });
+
+    test("returns an empty array if no users found with their screenTime > 100", () => {
+        const userData = [
+            {
+                username: "beth_1234",
+                name: "Beth Smith",
+                screenTime: [
+                    { date: "2019-05-01", usage: { twitter: 34, instagram: 22, facebook: 40 } },
+                    { date: "2019-05-02", usage: { twitter: 56, instagram: 40, facebook: 31 } },
+                    { date: "2019-05-03", usage: { twitter: 12, instagram: 15, facebook: 19 } },
+                    { date: "2019-05-04", usage: { twitter: 10, instagram: 56, facebook: 61 } },
+                ]
+            },
+            {
+                username: "sam_j_1989",
+                name: "Sam Jones",
+                screenTime: [
+                    { date: "2019-05-03", usage: { mapMyRun: 0, whatsApp: 0, facebook: 0, safari: 10 } },
+                    { date: "2019-06-13", usage: { mapMyRun: 0, whatsApp: 0, facebook: 0, safari: 16 } },
+                    { date: "2019-06-14", usage: { mapMyRun: 0, whatsApp: 0, facebook: 0, safari: 31 } },
+                ]
+            },
+            {
+                username: "james_c_1985",
+                name: "James Combes",
+                screenTime: [
+                    { date: "2019-04-11", usage: { mapMyRun: 30, whatsApp: 50, facebook: 20, safari: 1 } },
+                    { date: "2019-05-04", usage: { mapMyRun: 78, whatsApp: 22, facebook: 0, safari: 16 } },
+                    { date: "2019-06-14", usage: { mapMyRun: 0, whatsApp: 0, facebook: 0, safari: 99 } },
+                ]
+            },
+            {
+                username: "donald_t_1962",
+                name: "Donald Trump",
+                screenTime: [ //On 2019-04-11 Donald used exactly 100 mins of social media so was excluded
+                    { date: "2019-04-11", usage: { twitter: 80, whatsApp: 15, facebook: 3, safari: 2 } },
+                    { date: "2019-05-03", usage: { twitter: 12, whatsApp: 5, facebook: 35, safari: 1 } },
+                    { date: "2019-06-14", usage: { twitter: 0, whatsApp: 100, facebook: 0, safari: 0 } },
+                ]
+            },
+        ];
+        expect(getScreentimeAlertList(userData, "2019-05-03")).toEqual([]);
+        expect(getScreentimeAlertList(userData, "2019-06-14")).toEqual([]);
     });
 });
 
