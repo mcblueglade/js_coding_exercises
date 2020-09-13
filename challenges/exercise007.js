@@ -181,9 +181,9 @@ const findWinner = (board) => {
     (p, c) =>
       p === null
         ? c.reduce((pValue, currCell, i) => {
-            // Having already checked the value first value in the line,
-            // any subsequent values with a "null" renders this line from being a winner,
-            // so just return
+            // Having already checked the first value in the line,
+            // any subsequent values with a "null" renders it from being a winner,
+            // so just return the previous value.
             if (pValue == null && i > 0) {
               return pValue;
             }
@@ -192,7 +192,7 @@ const findWinner = (board) => {
             let cellValue = board[coordinates[0]][coordinates[1]];
 
             // If the previous value does not match the current value
-            // and this is not the first element in the line return null,
+            // and this is not the first element in the line, return null,
             // otherwise return the cell value.
             return (pValue =
               cellValue !== pValue && i !== 0 ? null : cellValue);
