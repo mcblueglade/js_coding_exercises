@@ -78,8 +78,7 @@ var tvRemote = function (word) {
 
   return word.split("").reduce((totalClicks, c) => {
     let secondCoords = findLocationOfLetter(c);
-
-    //firstLetter = c;
+    
     totalClicks +=
       Math.abs(secondCoords[0] - firstCoords[0]) +
       Math.abs(secondCoords[1] - firstCoords[1]) +
